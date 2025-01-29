@@ -25,6 +25,8 @@ namespace PizzaLover.Handler
                     // Hämta AltText från Umbraco
                     var altText = media.GetValue<string>("altText") ?? string.Empty;
                     var filePathJson = media.GetValue<string>("umbracoFile");
+                    altText = System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetBytes(altText));
+
 
                     // Parsar JSON för att hämta "src"-värdet
                     string blobName;
@@ -57,7 +59,8 @@ namespace PizzaLover.Handler
 
                     var metadata = new Dictionary<string, string>
                 {
-                    { "altText", altText ?? string.Empty }
+                    //{ "altText", altText ?? string.Empty }
+                    { "altText", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(altText)) }
                 };
 
                     //Kontrollera om blobben existerar och sätt metadata
@@ -77,6 +80,16 @@ namespace PizzaLover.Handler
                         Console.WriteLine("Blob does not exist.");
                     }
 
+                    // This part is only for refernce for alt text, with this i can pick upp altText using åäö
+                    //
+                    //if (blobClient.Exists())
+                    //{
+                    //    var altTextDecoded = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(metadata["altText"]));
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("icke bra");
+                    //}
                 }
             }
         }
