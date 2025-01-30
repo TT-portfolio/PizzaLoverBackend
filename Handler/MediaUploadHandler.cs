@@ -79,17 +79,6 @@ namespace PizzaLover.Handler
                     {
                         Console.WriteLine("Blob does not exist.");
                     }
-
-                    // This part is only for refernce for alt text, with this i can pick upp altText using åäö
-                    //
-                    //if (blobClient.Exists())
-                    //{
-                    //    var altTextDecoded = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(metadata["altText"]));
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("icke bra");
-                    //}
                 }
             }
         }
